@@ -73,6 +73,11 @@ var _ = { };
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
+    var resultsArray = [];
+    _.each(array, function(value){
+      if (_.indexOf(resultsArray, value) == -1){resultsArray.push(value)};
+    })
+    return resultsArray;
   };
 
 
