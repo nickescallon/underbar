@@ -275,11 +275,14 @@ var _ = { };
   // Shuffle an array.
   _.shuffle = function(array) {
     var results = [];
-    var len = array.length;
+    var len = array.length-1;
+    _.each(array, function(value){
+      results.push(value);
+    })
     while(len){
-      var rand = Math.floor(Math.random(len)*len--);
-      var temp = array[len];
-      results[len] = array[rand];
+      var temp = results[len];
+      var rand = Math.floor(Math.random()*len);
+      results[len] = results[rand];
       results[rand] = temp;
       len--;
     }
