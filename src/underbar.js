@@ -314,13 +314,10 @@ var _ = { };
   // of that string. For example, _.sortBy(people, 'name') should sort
   // an array of people by their name.
   _.sortBy = function(collection, iterator) {
-    //[{name : 'curly', age : 50}, {name : 'moe', age : 30}]; = ['moe', 'curly']
-    
     if (typeof(iterator) === 'string') {
-      return collection.sort(function(a,b){ return parseFloat(a[iterator]) - parseFloat(b[iterator])});
+      return collection.sort(function(a,b) {return parseFloat(a[iterator]) - parseFloat(b[iterator])});
     }
     return collection.sort(function(a,b) {return parseFloat(iterator(a)) - parseFloat(iterator(b))});
-
   };
 
   // Zip together two or more arrays with elements of the same index
@@ -336,6 +333,19 @@ var _ = { };
   //
   // Hint: Use Array.isArray to check if something is an array
   _.flatten = function(nestedArray, result) {
+    if (result === undefined){
+      var result = [];
+    }
+
+    _.each(nestedArray, function(value){
+      if (Array.isArray(value)) {
+        _.flatten(value, result);
+      } else{
+        result.push(value);
+      }
+    });
+
+    return result;
   };
 
   // Takes an arbitrary number of arrays and produces an array that contains
